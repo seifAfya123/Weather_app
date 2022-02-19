@@ -3,7 +3,7 @@
 
 https://user-images.githubusercontent.com/59228910/154817262-4bd62f01-0d61-4bb5-8d87-3bd1469ed7ae.mp4
 
-![weather app video](https://user-images.githubusercontent.com/59228910/154817262-4bd62f01-0d61-4bb5-8d87-3bd1469ed7ae.mp4)
+
 
 
 
