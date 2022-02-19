@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
             controller: controller,
             autofocus: true,
             cursorColor: Colors.white,
+            style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
               hintText: 'Type a city name',
               hintStyle: const TextStyle(
@@ -53,6 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   haveCity = true;
                   dateDayName =
                       DateFormat('MMM ,d EEEE ').format(date).toString();
+                  print("have city : $haveCity");
+                  print("have error : $error");
                 },
                 icon: const Icon(
                   Icons.search,
@@ -85,11 +88,19 @@ class _HomeScreenState extends State<HomeScreen> {
   CurrentWeather? weatherData;
   bool error = false;
   void getData(String city) async {
+    print("weatherData before: ${weatherData?.main?.temp}");
     final response = await _dataservice.getResponse(city);
-    setState(() {
-      weatherData = response;
-      weatherData == null ? error = true : error = false;
-    });
+    setState(
+      () {
+        weatherData = response;
+        print("weatherData after: ${weatherData?.main?.temp}");
+        if (weatherData?.main?.temp == null || controller.text.isEmpty) {
+          error = true;
+        } else {
+          error = false;
+        }
+      },
+    );
   }
 
   Widget _searchCity() {
@@ -210,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/images/placeholder.png',
+            'assets/images/notfound.png',
             fit: BoxFit.cover,
           ),
           const SizedBox(
