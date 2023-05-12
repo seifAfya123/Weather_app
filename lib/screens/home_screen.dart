@@ -181,12 +181,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       weatherData!.weather![0].main.toString(),
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     Text(
                       dateDayName,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.06),
                     Text(
