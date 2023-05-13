@@ -1,13 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:weather_app_v2/apiManger/models/current_weather.dart';
-import 'package:weather_app_v2/apiManger/models/main.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:weather_app_v2/apiManger/models/weather.dart';
 import 'package:weather_app_v2/apiManger/webService/api_web_service.dart';
-import 'package:weather_app_v2/main.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
@@ -54,8 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   haveCity = true;
                   dateDayName =
                       DateFormat('MMM ,d EEEE ').format(date).toString();
-                  print("have city : $haveCity");
-                  print("have error : $error");
                 },
                 icon: const Icon(
                   Icons.search,
@@ -88,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
   CurrentWeather? weatherData;
   bool error = false;
   void getData(String city) async {
-    print("weatherData before: ${weatherData?.main?.temp}");
+    // print("weatherData before: ${weatherData?.main?.temp}");
     final response = await _dataservice.getResponse(city);
     setState(
       () {
@@ -148,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (wearther) {
       case "Windy":
         return "https://assets10.lottiefiles.com/private_files/lf30_dmgebz1e.json";
-      case "Rainy ":
+      case "Rainy":
       case "Drizzle":
         return "https://assets3.lottiefiles.com/temp/lf20_rpC1Rd.json";
       case "Snow":
@@ -169,48 +163,30 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildWeatherwidget() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 60),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      weatherData!.weather![0].main.toString(),
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                    Text(
-                      dateDayName,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
-                    Text(
-                      (weatherData!.main!.temp! - 273)
-                              .toString()
-                              .substring(0, 2) +
-                          " C",
-                      style: const TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    Lottie.network(
-                      weatherLotti(weatherData!.weather![0].main.toString()),
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      // height: MediaQuery.of(context).size.width * 0.6,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          weatherData!.weather![0].main.toString(),
+          style: const TextStyle(color: Colors.white),
+        ),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+        Text(
+          dateDayName,
+          style: const TextStyle(color: Colors.white),
+        ),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+        Text(
+          (weatherData!.main!.temp! - 273).toString().substring(0, 2) + " C",
+          style: const TextStyle(
+              fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        Lottie.network(
+          weatherLotti(weatherData!.weather![0].main.toString()),
+          width: MediaQuery.of(context).size.width * 0.65,
+          // height: MediaQuery.of(context).size.width * 0.6,
+        ),
+      ],
     );
   }
 

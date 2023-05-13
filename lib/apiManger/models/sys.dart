@@ -34,21 +34,4 @@ class Sys {
         'sunrise': sunrise,
         'sunset': sunset,
       };
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    if (other is! Sys) return false;
-    final mapEquals = const DeepCollectionEquality().equals;
-    return mapEquals(other.toJson(), toJson());
-  }
-
-  @override
-  int get hashCode =>
-      type.hashCode ^
-      id.hashCode ^
-      message.hashCode ^
-      country.hashCode ^
-      sunrise.hashCode ^
-      sunset.hashCode;
 }

@@ -34,21 +34,4 @@ class Main {
         'pressure': pressure,
         'humidity': humidity,
       };
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    if (other is! Main) return false;
-    final mapEquals = const DeepCollectionEquality().equals;
-    return mapEquals(other.toJson(), toJson());
-  }
-
-  @override
-  int get hashCode =>
-      temp.hashCode ^
-      feelsLike.hashCode ^
-      tempMin.hashCode ^
-      tempMax.hashCode ^
-      pressure.hashCode ^
-      humidity.hashCode;
 }

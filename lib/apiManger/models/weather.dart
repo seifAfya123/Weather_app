@@ -21,16 +21,4 @@ class Weather {
         'description': description,
         'icon': icon,
       };
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    if (other is! Weather) return false;
-    final mapEquals = const DeepCollectionEquality().equals;
-    return mapEquals(other.toJson(), toJson());
-  }
-
-  @override
-  int get hashCode =>
-      id.hashCode ^ main.hashCode ^ description.hashCode ^ icon.hashCode;
 }
